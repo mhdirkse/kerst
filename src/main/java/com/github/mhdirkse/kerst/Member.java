@@ -3,11 +3,8 @@ package com.github.mhdirkse.kerst;
 import lombok.Getter;
 
 public enum Member {
-    MARTIJN("Martijn", "mhdirkse@live.nl"),
-    ARRI("Arri", "mhdirkse@live.nl"),
-    WERA("Wera", "mhdirkse@live.nl"),
-    LIESBETH("Liesbeth", "mhdirkse@live.nl"),
-    DAVID("David", "mhdirkse@live.nl");
+    JOHN("John", "john@live.nl"),
+    JACK("Jack", "jack@hotmail.com");
 
     @Getter
     private final String firstName;

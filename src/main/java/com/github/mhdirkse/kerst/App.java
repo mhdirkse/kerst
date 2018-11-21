@@ -17,10 +17,7 @@ public class App {
         final String username = credentials.getProperty("username");
         final String password = credentials.getProperty("password");
 
-        // Session session = getSession(username, password);
-        new MailSender(username, password).sendMail(
-                "mhdirkse@live.nl", "Probeersel Java mail", "body.html",
-                "home.jpg");
+        new InviterWithLots(new MailSender(username, password)).sendAll();
     }
 
     private static Properties loadProperties(String resource) throws IOException {

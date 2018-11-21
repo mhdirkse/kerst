@@ -3,6 +3,7 @@ package com.github.mhdirkse.kerst;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.function.Function;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -22,8 +23,12 @@ public class MailSender {
         this.password = password;
     }
 
-    public void sendMail(String recipient, String subject, String bodyResource, String pictureResource)
-            throws EmailException, IOException {
+    public void sendMail(
+            String recipient,
+            String subject,
+            String bodyResource,
+            String pictureResource,
+            Function<String, String> postProcessor) throws EmailException, IOException {
         HtmlEmail email = new HtmlEmail();
         email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
@@ -34,6 +39,7 @@ public class MailSender {
         String htmlMsg = getText(bodyResource);
         String cid = email.embed(getFile(pictureResource));
         htmlMsg = htmlMsg.replaceAll("##cid##", cid);
+        htmlMsg = postProcessor.apply(htmlMsg);
         email.setHtmlMsg(htmlMsg);
         email.addTo(recipient);
         email.send();

@@ -3,3 +3,5 @@ target
 .settings
 .classpath
 /src/main/resources/credentials
+/src/main/resources/body.html.bak
+/src/main/java/com/github/mhdirkse/kerst/Member.java.bak
