@@ -4,33 +4,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-
+import org.apache.commons.mail.EmailException;
+/**
+ * Picture comes from: 46798617-verbazingwekkende-fee-huis-ingericht-met-kerstmis-in-de-vorm-van-elfs-hoed-met-geopende-deur-en-de-o
+ * @author martijn
+ *
+ */
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws EmailException, IOException {
         final Properties credentials = loadProperties("/credentials");
         final String username = credentials.getProperty("username");
         final String password = credentials.getProperty("password");
 
-        Session session = getSession(username, password);
-        new MailSender(username, password, session).sendMail(
-                "mhdirkse@live.nl", "Probeersel Java mail", "body.html");
-    }
-
-    private static Session getSession(final String username, final String password) {
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-        return session;
+        // Session session = getSession(username, password);
+        new MailSender(username, password).sendMail(
+                "mhdirkse@live.nl", "Probeersel Java mail", "body.html",
+                "home.jpg");
     }
 
     private static Properties loadProperties(String resource) throws IOException {
